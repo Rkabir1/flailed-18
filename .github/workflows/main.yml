@@ -1,34 +1,32 @@
 name: Build APK
 on:
   push:
-    branches: [ main ] # আপনার মেইন ব্রাঞ্চে পুশ করলে বিল্ড শুরু হবে
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # ১. রিপোজিটরি চেকআউট (v4 ব্যবহার করা হয়েছে)
       - name: Checkout Code
-        uses: actions/checkout@v4 
+        uses: actions/checkout@v4 # লেটেস্ট ভার্সন
 
-      # ২. ফ্লাটার এনভায়রনমেন্ট সেটআপ (v2 ব্যবহার করা হয়েছে)
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          cache: true # এতে বিল্ডের গতি বাড়বে
+          cache: true # বিল্ড দ্রুত করার জন্য
 
-      # ৩. প্রজেক্টের ডিপেন্ডেন্সি ডাউনলোড করা
       - name: Install Dependencies
         run: flutter pub get
 
-      # ৪. রিলিজ এপিকে বিল্ড করা (V1 Embedding Error সমাধানসহ)
-      - name: Build APK
-        run: flutter build apk --release
+      - name: Clean Project
+        run: flutter clean # পুরনো ক্যাশে এরর দূর করতে
 
-      # ৫. তৈরি হওয়া APK গিটহাবে আপলোড করা (v4 ব্যবহার করা হয়েছে)
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Build APK (Release)
+        run: flutter build apk --release # এখানে বিল্ড সফল হবে
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4 # লেটেস্ট আপলোড মেথড
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
