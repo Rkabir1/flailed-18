@@ -1,0 +1,12 @@
+android {
+    namespace "AR.internatial"
+    compileSdkVersion 34
+
+    defaultConfig {
+        applicationId "AR.internatial"
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+    }
+}
