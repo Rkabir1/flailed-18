@@ -1,3 +1,6 @@
-<meta-data
-    android:name="io.flutter.embedding.android.NormalThemes"
-    android:resource="@style/NormalTheme" />
+package AR.internatial
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
