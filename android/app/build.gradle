@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services' 
 
 android {
-    namespace "AR.internatial" // লেটেস্ট ভার্সনের জন্য এটি প্রয়োজন
+    namespace "AR.internatial" // এটি আপনার বিল্ড এরর সমাধান করবে
     compileSdkVersion 34
 
     defaultConfig {
@@ -17,11 +17,13 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.debug
+            shrinkResources false
+            minifyEnabled false
         }
     }
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:33.1.0') // লেটেস্ট ফায়ারবেস ভার্সন
+    implementation platform('com.google.firebase:firebase-bom:33.1.0')
     implementation 'com.google.firebase:firebase-analytics'
 }
